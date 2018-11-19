@@ -1,0 +1,41 @@
+{
+  "name": "odilyn-the-friendly-cyclops",
+  "version": "0.0.1",
+  "description": "A game about letting go",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "grunt",
+    "watch": "grunt watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gustavgb/odilyn-the-friendly-cyclops.git"
+  },
+  "keywords": [
+    "game",
+    "narrative",
+    "cyclops"
+  ],
+  "author": "Gustav Burchardt",
+  "license": "SEE LICENSE IN README.md",
+  "bugs": {
+    "url": "https://github.com/gustavgb/odilyn-the-friendly-cyclops/issues"
+  },
+  "homepage": "https://github.com/gustavgb/odilyn-the-friendly-cyclops#readme",
+  "devDependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "eslint": "^5.3.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "grunt": "^1.0.3",
+    "grunt-babel": "^8.0.0",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^4.0.0",
+    "grunt-contrib-watch": "^1.1.0"
+  }
+}
