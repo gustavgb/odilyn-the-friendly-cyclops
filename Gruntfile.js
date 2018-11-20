@@ -21,6 +21,14 @@ module.exports = (grunt) => {
         }
       }
     },
+    copy: {
+      files: {
+        expand: true,
+        cwd: 'public',
+        src: ['**/*'],
+        dest: 'dist/'
+      }
+    },
     watch: {
       scripts: {
         files: 'src/**/*.js',
@@ -29,13 +37,32 @@ module.exports = (grunt) => {
           debounceDelay: 250,
           atBegin: true
         }
+      },
+      public: {
+        files: 'public/*',
+        tasks: ['copy'],
+        options: {
+          debounceDelay: 250,
+          atBegin: true
+        }
       }
+    },
+    clean: ['dist'],
+    wait: {
+      options: {
+        delay: 500
+      },
+      pause: {}
     }
   })
 
   grunt.loadNpmTasks('grunt-contrib-concat')
   grunt.loadNpmTasks('grunt-contrib-watch')
   grunt.loadNpmTasks('grunt-babel')
+  grunt.loadNpmTasks('grunt-contrib-copy')
+  grunt.loadNpmTasks('grunt-contrib-clean')
+  grunt.loadNpmTasks('grunt-wait')
 
-  grunt.registerTask('default', ['concat', 'babel'])
+  grunt.registerTask('build', ['clean', 'wait', 'concat', 'babel', 'copy'])
+  grunt.registerTask('start', ['clean', 'wait', 'watch'])
 }
