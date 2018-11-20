@@ -1,4 +1,6 @@
-window.App = class App {
+import Scene from 'classes/Scene'
+
+class Game {
   constructor (options) {
     const {
       width,
@@ -11,10 +13,17 @@ window.App = class App {
     this.height = height
     this.centered = centered
     this.bindedResize = this.resize.bind(this)
+    this.bindedLoop = this.loop.bind(this)
+
+    this.running = false
+
+    this.scene = new Scene()
 
     this.createCanvas(root)
     this.resize()
     window.addEventListener('resize', this.bindedResize)
+
+    this.start()
   }
 
   createCanvas (root) {
@@ -43,9 +52,37 @@ window.App = class App {
     this.render()
   }
 
+  start () {
+    this.running = true
+
+    this.loop()
+  }
+
+  setScene (scene) {
+    if (scene instanceof Scene) {
+      this.scene = scene
+    } else {
+      console.log('Tried to set game scene, but recieved invalid scene')
+    }
+  }
+
+  loop () {
+    if (this.running) {
+      requestAnimationFrame(this.bindedLoop)
+    }
+
+    this.scene.update()
+
+    this.render()
+  }
+
   render () {
     const ctx = this.canvas.getContext('2d')
     ctx.fillStyle = 'white'
     ctx.fillRect(0, 0, this.width, this.height)
+
+    this.scene.render(ctx)
   }
 }
+
+export default Game
