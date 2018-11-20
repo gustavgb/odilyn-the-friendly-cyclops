@@ -1,4 +1,4 @@
-import imageLoader from 'tools/imageLoader'
+import imageLoader from 'utils/imageLoader'
 import Animation from 'classes/Animation'
 import SceneObject from 'classes/SceneObject'
 
