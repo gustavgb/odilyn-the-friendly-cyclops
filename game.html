@@ -1,0 +1,40 @@
+<html>
+
+<head>
+
+  <title>Odilyn</title>
+  <meta charset="utf-8" />
+
+  <style>
+
+html, body {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  position: absolute;
+}
+
+  </style>
+
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script src="dist/script.js"></script>
+  <script>
+    var game = new App({
+      width: 800,
+      height: 600,
+      root: document.getElementById('root'),
+      centered: true
+    })
+  </script>
+
+</body>
+
+</html>
