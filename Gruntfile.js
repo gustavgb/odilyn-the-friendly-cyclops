@@ -47,10 +47,10 @@ module.exports = (grunt) => {
         }
       }
     },
-    clean: ['dist'],
+    clean: ['dist/*'],
     wait: {
       options: {
-        delay: 500
+        delay: 1000
       },
       pause: {}
     }
