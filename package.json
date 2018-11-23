@@ -2,11 +2,10 @@
   "name": "odilyn-the-friendly-cyclops",
   "version": "0.0.1",
   "description": "A game about letting go",
-  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack .",
-    "start-scripts": "webpack --watch .",
+    "build": "webpack",
+    "start-scripts": "webpack --watch",
     "start": "concurrently --kill-others \"yarn start-scripts\" \"serve ./dist\""
   },
   "repository": {

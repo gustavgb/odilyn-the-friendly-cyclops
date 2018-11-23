@@ -4,6 +4,7 @@ class InputManager {
   constructor (controls) {
     this.keys = {}
     this.scheme = InputManager.createScheme(controls)
+    this.events = {}
 
     this._keyDown = this.keyDown.bind(this)
     this._keyUp = this.keyUp.bind(this)
@@ -13,7 +14,7 @@ class InputManager {
   }
 
   static createScheme (controls) {
-    return Object.keys(controls).reduce((scheme, key) => {
+    const inverse = Object.keys(controls).reduce((scheme, key) => {
       const keyCode = controls[key]
       let add
 
@@ -33,22 +34,45 @@ class InputManager {
         ...add
       }
     }, {})
+
+    return {
+      byName: controls,
+      byCode: inverse
+    }
   }
 
   keyDown (e) {
-    const keyName = this.scheme[e.keyCode]
+    const keyName = this.scheme.byCode[e.keyCode]
+
+    if (keyName) {
+      e.preventDefault()
+    }
+
+    if (keyName in this.events) {
+      this.events[keyName]()
+    }
 
     this.keys[keyName] = true
   }
 
   keyUp (e) {
-    const keyName = this.scheme[e.keyCode]
+    const keyName = this.scheme.byCode[e.keyCode]
 
     delete this.keys[keyName]
   }
 
   isKeyDown (keyName) {
     return keyName in this.keys
+  }
+
+  addEvent (keyName, eventHandler) {
+    if (typeof eventHandler !== 'function') {
+      throw new Error('Event handler is not a function.')
+    } else if (this.scheme.byName[keyName]) {
+      this.events[keyName] = eventHandler
+    } else {
+      throw new Error('Event key not found.')
+    }
   }
 }
 

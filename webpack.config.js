@@ -19,19 +19,20 @@ module.exports = (env, argv) => {
     ])
   ]
 
-  if (mode === 'production') {
-    plugins.push(
-      new webpack.DefinePlugin({
-        'process.env.NODE_ENV': '"production"'
-      })
-    )
-  }
+  plugins.push(
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': mode
+    })
+  )
 
   return {
-    entry: path.join(__dirname, 'src/index.js'),
+    entry: {
+      app: path.join(__dirname, 'src/index.js'),
+      editor: path.join(__dirname, 'src/editor.js')
+    },
     output: {
       path: path.join(__dirname, 'dist'),
-      filename: 'script.js'
+      filename: '[name].js'
     },
     mode,
     devtool: mode === 'development' ? 'source-map' : 'cheap-module-source-map',
