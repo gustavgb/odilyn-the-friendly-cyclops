@@ -13,10 +13,26 @@ class InputManager {
   }
 
   static createScheme (controls) {
-    return Object.keys(controls).reduce((scheme, key) => ({
-      ...scheme,
-      [controls[key]]: key
-    }), {})
+    return Object.keys(controls).reduce((scheme, key) => {
+      const keyCode = controls[key]
+      let add
+
+      if (Array.isArray(keyCode)) {
+        add = keyCode.reduce((acc, val) => ({
+          ...acc,
+          [val]: key
+        }), {})
+      } else {
+        add = {
+          [controls[key]]: key
+        }
+      }
+
+      return {
+        ...scheme,
+        ...add
+      }
+    }, {})
   }
 
   keyDown (e) {
