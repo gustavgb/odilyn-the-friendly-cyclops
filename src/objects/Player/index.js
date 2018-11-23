@@ -1,7 +1,7 @@
 import imageLoader from 'utils/imageLoader'
 import inputManager from 'utils/inputManager'
-import Animation from 'core/Animation'
-import Animator from 'core/Animator'
+import Animation from 'components/Animation'
+import Animator from 'components/Animator'
 import SceneObject from 'core/SceneObject'
 
 const eyes = imageLoader.addImage('playerEyes', require('./images/eyes.png'))

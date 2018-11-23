@@ -1,4 +1,4 @@
-import Animation from 'core/Animation'
+import Animation from 'components/Animation'
 import Renderer from 'core/Renderer'
 
 class Animator extends Renderer {
