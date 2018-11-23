@@ -1,5 +1,5 @@
 import Player from 'objects/Player'
-import Terrain from 'core/Terrain'
+import Terrain from 'objects/Terrain'
 import Scene from 'core/Scene'
 
 const terrain = new Terrain([
