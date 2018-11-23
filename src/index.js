@@ -1,4 +1,4 @@
-import Game from 'classes/Game'
+import Game from 'core/Game'
 import level1 from 'scenes/level1'
 
 window.createGame = (width, height, centered) => {

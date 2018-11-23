@@ -1,4 +1,5 @@
-import Scene from 'classes/Scene'
+import Scene from 'core/Scene'
+import timeManager from 'utils/timeManager'
 
 class Game {
   constructor (options) {
@@ -70,6 +71,8 @@ class Game {
     if (this.running) {
       requestAnimationFrame(this.bindedLoop)
     }
+
+    timeManager.update()
 
     this.scene.update()
 

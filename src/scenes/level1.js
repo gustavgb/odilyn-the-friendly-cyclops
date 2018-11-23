@@ -1,5 +1,5 @@
-import Player from 'classes/Player'
-import Scene from 'classes/Scene'
+import Player from 'entities/Player'
+import Scene from 'core/Scene'
 
 const player = new Player(0, 0)
 

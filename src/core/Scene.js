@@ -1,4 +1,4 @@
-import SceneObject from 'classes/SceneObject'
+import SceneObject from 'core/SceneObject'
 
 class Scene {
   constructor (objects = []) {
