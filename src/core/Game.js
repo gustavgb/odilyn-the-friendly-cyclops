@@ -81,7 +81,7 @@ class Game {
 
   render () {
     const ctx = this.canvas.getContext('2d')
-    ctx.fillStyle = 'white'
+    ctx.fillStyle = '#f4f4d7'
     ctx.fillRect(0, 0, this.width, this.height)
 
     this.scene.render(ctx)

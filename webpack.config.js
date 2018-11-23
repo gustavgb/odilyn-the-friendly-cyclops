@@ -15,7 +15,9 @@ module.exports = (env, argv) => {
       allowExternal: true
     }),
     new CopyWebpackPlugin([
-      path.join(__dirname, 'public')
+      path.join(__dirname, 'public'),
+      path.join(__dirname, 'src/editor.html'),
+      path.join(__dirname, 'src/index.html')
     ])
   ]
 
