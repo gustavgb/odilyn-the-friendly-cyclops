@@ -1,4 +1,4 @@
-class ImageObject {
+class Asset {
   constructor (name, path) {
     this.loaded = false
 
@@ -15,7 +15,7 @@ class ImageObject {
   }
 }
 
-class ImageLoader {
+class AssetManager {
   constructor () {
     this.images = {}
   }
@@ -29,7 +29,7 @@ class ImageLoader {
       throw new Error('Tried to add image, but missing name or path!')
     }
 
-    const img = new ImageObject(name, path)
+    const img = new Asset(name, path)
 
     this.images[name] = img
 
@@ -41,4 +41,6 @@ class ImageLoader {
   }
 }
 
-export default new ImageLoader()
+const assetManager = new AssetManager()
+
+export default assetManager

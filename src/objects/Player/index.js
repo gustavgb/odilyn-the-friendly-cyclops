@@ -1,13 +1,13 @@
-import imageLoader from 'utils/imageLoader'
+import assetManager from 'utils/assetManager'
 import inputManager from 'utils/inputManager'
 import Animation from 'components/Animation'
 import Animator from 'components/Animator'
 import SceneObject from 'core/SceneObject'
 
-const eyes = imageLoader.addImage('playerEyes', require('./images/eyes.png'))
-const pupils = imageLoader.addImage('playerEyes', require('./images/pupils.png'))
+const eyes = assetManager.addImage('playerEyes', require('./images/eyes.png'))
+const pupils = assetManager.addImage('playerEyes', require('./images/pupils.png'))
 
-const walkImages = imageLoader.addImages([
+const walkImages = assetManager.addImages([
   { name: 'walk0', path: require('./images/walk0.png') },
   { name: 'walk1', path: require('./images/walk1.png') },
   { name: 'walk2', path: require('./images/walk2.png') },
