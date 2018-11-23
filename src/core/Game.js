@@ -23,8 +23,6 @@ class Game {
     this.createCanvas(root)
     this.resize()
     window.addEventListener('resize', this.bindedResize)
-
-    this.start()
   }
 
   createCanvas (root) {
@@ -63,7 +61,7 @@ class Game {
     if (scene instanceof Scene) {
       this.scene = scene
     } else {
-      console.log('Tried to set game scene, but recieved invalid scene')
+      throw new Error('Scene not valid.')
     }
   }
 

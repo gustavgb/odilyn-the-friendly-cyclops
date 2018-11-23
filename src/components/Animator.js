@@ -1,5 +1,5 @@
 import Animation from 'components/Animation'
-import Renderer from 'core/Renderer'
+import Renderer from 'base/Renderer'
 
 class Animator extends Renderer {
   constructor (scheme) {

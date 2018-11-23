@@ -12,6 +12,8 @@ window.createGame = (width, height, centered) => {
 
   game.setScene(level1)
 
+  game.start()
+
   const debug = window.debug = JSON.parse(sessionStorage.getItem('debug'))
 
   inputManager.addEvent('debug', () => {

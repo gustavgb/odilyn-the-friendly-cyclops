@@ -1,7 +1,7 @@
 class TimeManager {
   constructor () {
-    this.lastTime = 0
     this.deltaTime = 0
+    this.lastTime = Date.now()
   }
 
   update () {

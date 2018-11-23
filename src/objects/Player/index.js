@@ -2,7 +2,7 @@ import assetManager from 'utils/assetManager'
 import inputManager from 'utils/inputManager'
 import Animation from 'components/Animation'
 import Animator from 'components/Animator'
-import SceneObject from 'core/SceneObject'
+import SceneObject from 'base/SceneObject'
 
 const eyes = assetManager.addImage('playerEyes', require('./images/eyes.png'))
 const pupils = assetManager.addImage('playerEyes', require('./images/pupils.png'))
@@ -28,7 +28,7 @@ const animationScheme = {
 
 class Player extends SceneObject {
   constructor (x, y) {
-    super()
+    super('dynamic')
 
     const scale = this.scale = 0.2
 
@@ -44,24 +44,49 @@ class Player extends SceneObject {
     this.eyesWidth = 120 * scale
     this.eyesHeight = 57 * scale
 
-    this.speed = 100
+    this.speed = 1000
 
     this.animator = new Animator(animationScheme)
   }
 
   update () {
+    super.update()
+
+    let walking = false
+
     if (inputManager.isKeyDown('left')) {
-      this.x -= this.speed * this.deltaTime
+      if (this.vX > -500) {
+        this.vX -= this.speed * this.deltaTime
+      }
 
       this.animator.setAnimation('walk')
       this.animator.flipped = true
+      walking = true
     } else if (inputManager.isKeyDown('right')) {
-      this.x += this.speed * this.deltaTime
+      if (this.vX < 500) {
+        this.vX += this.speed * this.deltaTime
+      }
 
       this.animator.setAnimation('walk')
       this.animator.flipped = false
+      walking = true
     } else {
       this.animator.setAnimation('idle')
+    }
+
+    if (this.grounded) {
+      if (walking) {
+        this.vX *= 0.98
+      } else {
+        this.vX *= 0.9
+      }
+
+      if (inputManager.isKeyDown('jump')) {
+        this.vY = -500
+        this.grounded = false
+      }
+    } else {
+      this.vX *= 0.98
     }
 
     let targetX = this.eyesOffsetX
