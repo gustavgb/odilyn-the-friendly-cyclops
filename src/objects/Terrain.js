@@ -1,5 +1,9 @@
-class Terrain {
+import WalkableObject from 'base/WalkableObject'
+
+class Terrain extends WalkableObject {
   constructor (terrainData = []) {
+    super()
+
     if (Terrain.validateData(terrainData)) {
       this.index = Terrain.createIndex(terrainData)
       this.data = terrainData
@@ -53,7 +57,7 @@ class Terrain {
       return this.index[Math.round(x)].filter(h => y >= h && y <= h + margin)[0]
     }
 
-    return 0
+    return null
   }
 
   render (ctx) {

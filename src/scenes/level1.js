@@ -1,5 +1,6 @@
 import Player from 'objects/Player'
-import Terrain from 'base/Terrain'
+import Terrain from 'objects/Terrain'
+import Platform from 'objects/Platform'
 import Scene from 'core/Scene'
 
 const terrain = new Terrain([
@@ -14,8 +15,16 @@ const terrain = new Terrain([
 
 const player = new Player(0, 0)
 
+const platform = new Platform(300, 400, 100, 20)
+
+window.player = player
+window.terrain = terrain
+window.platform = platform
+
 const scene = new Scene([
+  terrain,
+  platform,
   player
-], terrain)
+])
 
 export default scene

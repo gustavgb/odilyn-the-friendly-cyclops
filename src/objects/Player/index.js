@@ -2,7 +2,7 @@ import assetManager from 'utils/assetManager'
 import inputManager from 'utils/inputManager'
 import Animation from 'components/Animation'
 import Animator from 'components/Animator'
-import SceneObject from 'base/SceneObject'
+import DynamicObject from 'base/DynamicObject'
 
 const eyes = assetManager.addImage('playerEyes', require('./images/eyes.png'))
 const pupils = assetManager.addImage('playerEyes', require('./images/pupils.png'))
@@ -26,9 +26,9 @@ const animationScheme = {
   idle: new Animation([walkImages[0]], 0)
 }
 
-class Player extends SceneObject {
+class Player extends DynamicObject {
   constructor (x, y) {
-    super('dynamic')
+    super()
 
     const scale = this.scale = 0.2
 
@@ -50,8 +50,6 @@ class Player extends SceneObject {
   }
 
   update () {
-    super.update()
-
     let walking = false
 
     if (inputManager.isKeyDown('left')) {
@@ -97,6 +95,8 @@ class Player extends SceneObject {
     this.eyesX += (targetX - this.eyesX) / 10
 
     this.animator.update()
+
+    super.update()
   }
 
   render (ctx) {
