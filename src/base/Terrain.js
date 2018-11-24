@@ -1,73 +1,77 @@
 class Terrain {
   constructor (terrainData = []) {
     if (Terrain.validateData(terrainData)) {
-      this.lines = Terrain.createLines(terrainData)
-      this.index = Terrain.createIndex(this.lines)
+      this.index = Terrain.createIndex(terrainData)
+      this.data = terrainData
     } else {
       throw new Error('Terrain data invalid.')
     }
   }
 
   static validateData (data) {
-    return data.filter(d => Array.isArray(d) && d.length === 4).length === data.length
+    return Array.isArray(data) && data.length % 2 === 0 && (data.length > 2 || data.length === 0) && data.filter(d => !isNaN(d)).length === data.length
   }
 
-  static createLines (data) {
-    // Create equations
-    const lines = data.map(line => {
-      return {
+  static createIndex (data) {
+    const lines = []
+    for (let i = 0; i < data.length - 1; i += 2) {
+      lines.push({
         start: {
-          x: line[0],
-          y: line[1]
+          x: Math.floor(data[i]),
+          y: Math.floor(data[i + 1])
         },
         end: {
-          x: line[2],
-          y: line[3]
+          x: Math.floor(data[i + 2]),
+          y: Math.floor(data[i + 3])
         }
-      }
-    })
+      })
+    }
 
-    return lines
-  }
-
-  static createIndex (lines) {
-    const lineIndex = lines.map(line => {
-      const x = line.start.x - line.end.x
-      const y = line.start.y - line.end.y
-      const a = y / x
+    const lineIndex = lines.reduce((index, line) => {
+      const dX = line.end.x - line.start.x
+      const dY = line.end.y - line.start.y
+      const a = dY / dX
       const b = line.start.y
+      const func = (position) => a * position + b
 
-      return {
-        validAfter: line.start.x,
-        validBefore: line.end.x,
-        equation: (position) => a * position + b
+      for (let x = line.start.x; x <= line.end.x; x++) {
+        index[x] = index[x] || []
+
+        index[x].push(func(x - line.start.x))
+
+        index[x].sort()
       }
-    })
+
+      return index
+    }, [])
 
     return lineIndex
   }
 
   getHeightAtPosition (x, y, margin = 1000) {
-    const h = (
-      this.index.filter(line => {
-        const h = line.equation(x - line.validAfter)
-        return x >= line.validAfter && x <= line.validBefore && y >= h && y <= h + margin
-      })
-        .map(line => line.equation(x - line.validAfter))
-        .sort()
-    )[0]
-    return h
+    if (this.index) {
+      return this.index[Math.round(x)].filter(h => y >= h && y <= h + margin)[0]
+    }
+
+    return 0
   }
 
   render (ctx) {
-    this.lines.forEach(line => {
-      ctx.beginPath()
-      ctx.moveTo(line.start.x, line.start.y)
-      ctx.lineTo(line.end.x, line.end.y)
-      ctx.strokeStyle = 'black'
-      ctx.lineWidth = 3
-      ctx.stroke()
-    })
+    if (this.data.length <= 2) {
+      return
+    }
+
+    ctx.beginPath()
+    ctx.moveTo(this.data[0], this.data[1])
+
+    for (let i = 2; i < this.data.length; i += 2) {
+      ctx.lineTo(this.data[i], this.data[i + 1])
+    }
+
+    ctx.strokeStyle = 'black'
+    ctx.lineWidth = 3
+    ctx.lineJoin = 'round'
+    ctx.stroke()
   }
 }
 
