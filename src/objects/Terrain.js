@@ -52,8 +52,11 @@ class Terrain extends WalkableObject {
     return lineIndex
   }
 
-  getHeightAtPosition (x, y, margin = 1000) {
-    if (this.index) {
+  getHeightAtPosition (objX, objY, margin = 1000) {
+    const x = objX - this.x
+    const y = objY - this.y
+
+    if (this.index && x < this.index.length && x > 0) {
       return this.index[Math.round(x)].filter(h => y >= h && y <= h + margin)[0]
     }
 

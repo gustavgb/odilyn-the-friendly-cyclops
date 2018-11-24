@@ -14,6 +14,7 @@ const terrain = new Terrain([
 ])
 
 const player = new Player(0, 0)
+player.name = 'Player'
 
 const platform = new Platform(300, 400, 100, 20)
 
@@ -25,6 +26,8 @@ const scene = new Scene([
   terrain,
   platform,
   player
-])
+], {
+  follow: 'Player'
+})
 
 export default scene

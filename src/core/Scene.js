@@ -1,13 +1,18 @@
 import SceneObject from 'base/SceneObject'
+import Camera from 'objects/Camera'
 import timeManager from 'utils/timeManager'
 
 class Scene {
-  constructor (objects = []) {
+  constructor (objects = [], options = {}) {
     this.walkable = []
     this.static = []
     this.dynamic = []
 
     objects.forEach(obj => this.addObject(obj))
+
+    this.camera = new Camera()
+
+    this.follow = objects.filter(o => o.name === options.follow)[0] || null
   }
 
   addObject (obj) {
@@ -52,12 +57,25 @@ class Scene {
         }
       }
     })
+
+    if (this.follow) {
+      this.camera.follow(this.follow)
+    }
   }
 
-  render (ctx) {
+  render (ctx, width, height) {
+    const translate = this.camera.getTranslate(width, height)
+    const scale = this.camera.getScale()
+
+    ctx.translate(translate.x, translate.y)
+    ctx.scale(scale.x, scale.y)
+
     this.walkable.forEach(obj => obj.render(ctx))
     this.static.forEach(obj => obj.render(ctx))
     this.dynamic.forEach(obj => obj.render(ctx))
+
+    ctx.scale(1 / scale.x, 1 / scale.y)
+    ctx.translate(-translate.x, -translate.y)
   }
 }
 

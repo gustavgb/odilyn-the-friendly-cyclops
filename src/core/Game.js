@@ -82,7 +82,7 @@ class Game {
     ctx.fillStyle = '#f4f4d7'
     ctx.fillRect(0, 0, this.width, this.height)
 
-    this.scene.render(ctx)
+    this.scene.render(ctx, this.width, this.height)
   }
 }
 
