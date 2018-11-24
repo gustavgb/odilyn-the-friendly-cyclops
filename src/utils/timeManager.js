@@ -2,6 +2,8 @@ class TimeManager {
   constructor () {
     this.deltaTime = 0
     this.lastTime = Date.now()
+
+    this.fpsCache = []
   }
 
   update () {
@@ -15,8 +17,27 @@ class TimeManager {
   getDeltaTime () {
     return this.deltaTime
   }
+
+  renderFPS (ctx, x, y) {
+    if (this.deltaTime === 0) {
+      return
+    }
+
+    const fps = (1 / this.deltaTime)
+    this.fpsCache.push(fps)
+    if (this.fpsCache.length > 10) {
+      this.fpsCache.shift()
+    }
+    const fpsAvg = Math.round(this.fpsCache.reduce((sum, val) => sum + val, 0) / this.fpsCache.length)
+
+    ctx.textBaseline = 'top'
+    ctx.textAlign = 'left'
+    ctx.font = '10px sans-serif'
+    ctx.fillStyle = 'black'
+    ctx.fillText('FPS: ' + fpsAvg, x, y)
+  }
 }
 
-const timeManager = new TimeManager()
+const timeManager = window.timeManager = new TimeManager()
 
 export default timeManager

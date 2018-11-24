@@ -10,8 +10,9 @@ class Game {
       root
     } = options
 
-    this.width = width
-    this.height = height
+    this.setWidth = width || null
+    this.setHeight = height || null
+    this.scale = 1
     this.centered = centered
     this.bindedResize = this.resize.bind(this)
     this.bindedLoop = this.loop.bind(this)
@@ -23,6 +24,22 @@ class Game {
     this.createCanvas(root)
     this.resize()
     window.addEventListener('resize', this.bindedResize)
+  }
+
+  get width () {
+    return this.setWidth || window.innerWidth
+  }
+
+  set width (val) {
+    this.setWidth = val || null
+  }
+
+  get height () {
+    return this.setHeight || window.innerHeight
+  }
+
+  set height (val) {
+    this.setHeight = val || null
   }
 
   createCanvas (root) {
@@ -40,6 +57,12 @@ class Game {
   resize () {
     this.canvas.width = this.width
     this.canvas.height = this.height
+    this.scale = this.height / 800
+
+    if (this.scene) {
+      this.scene.camera.zoom = this.scale
+    }
+
     if (this.centered) {
       this.canvas.style.left = (window.innerWidth - this.width) / 2
       this.canvas.style.top = (window.innerHeight - this.height) / 2
@@ -60,6 +83,7 @@ class Game {
   setScene (scene) {
     if (scene instanceof Scene) {
       this.scene = scene
+      scene.camera.zoom = this.scale
     } else {
       throw new Error('Scene not valid.')
     }

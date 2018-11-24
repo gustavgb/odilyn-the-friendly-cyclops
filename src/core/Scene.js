@@ -76,6 +76,8 @@ class Scene {
 
     ctx.scale(1 / scale.x, 1 / scale.y)
     ctx.translate(-translate.x, -translate.y)
+
+    timeManager.renderFPS(ctx, 5, 5)
   }
 }
 
