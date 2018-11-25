@@ -7,6 +7,7 @@ class DynamicObject extends SceneObject {
 
     this.vX = 0
     this.vY = 0
+    this.blocked = false
 
     this.grounded = false
   }
@@ -18,7 +19,11 @@ class DynamicObject extends SceneObject {
       this.vY = 0
     }
 
-    this.x += this.vX * this.deltaTime
+    if (!this.blocked) {
+      this.x += this.vX * this.deltaTime
+    } else {
+      this.vX = 0
+    }
     this.y += this.vY * this.deltaTime
   }
 
@@ -36,6 +41,14 @@ class DynamicObject extends SceneObject {
 
   get deltaTime () {
     return timeManager.getDeltaTime()
+  }
+
+  get normalizedVX () {
+    return this.vX !== 0 ? (this.vX / Math.abs(this.vX)) : 0
+  }
+
+  get normalizedVY () {
+    return this.vY !== 0 ? (this.vY / Math.abs(this.vY)) : 0
   }
 }
 

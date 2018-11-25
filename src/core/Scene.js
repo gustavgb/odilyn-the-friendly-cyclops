@@ -7,6 +7,7 @@ class Scene {
     this.walkable = []
     this.static = []
     this.dynamic = []
+    this.blocking = []
     this.objects = objects.map(this.assignObjectScene.bind(this))
 
     this.objects.forEach(obj => this.addObject(obj))
@@ -47,6 +48,10 @@ class Scene {
           break
         case 'walkable':
           this.walkable.push(obj)
+          break
+        case 'blocking':
+          this.blocking.push(obj)
+          break
       }
     } else {
       throw new Error('Object not valid. Must be of type SceneObject.')
@@ -59,6 +64,12 @@ class Scene {
     this.dynamic.forEach(obj => obj.update())
 
     this.dynamic.forEach(obj => {
+      const block = this.blocking.map(blockingObj => blockingObj.isBlocking(obj)).filter(b => b.blocking)[0] || { blocking: false }
+      obj.blocked = block.blocking
+      if (obj.blocked) {
+        obj.x = block.correctedX
+      }
+
       const feetPos = obj.feetPosition
 
       let terrainH
