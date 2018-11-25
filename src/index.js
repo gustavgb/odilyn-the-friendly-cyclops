@@ -1,5 +1,5 @@
 import Game from 'core/Game'
-import level1 from 'scenes/level1'
+import level1 from 'scenes/home'
 import inputManager from 'utils/inputManager'
 
 const game = new Game({
