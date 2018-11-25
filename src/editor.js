@@ -1,29 +1,6 @@
-console.log('hello world!')
+import Editor from 'editor/Editor'
+import createGlobals from 'editor/globals'
 
-let state = {
-  level: 'test'
-}
+const editor = window.editor = new Editor(document.getElementById('root'))
 
-window.runDebug = () => {
-  sessionStorage.setItem('debug', JSON.stringify(state))
-
-  window.run()
-}
-
-window.runWithoutDebug = () => {
-  sessionStorage.removeItem('debug')
-
-  window.run()
-}
-
-window.run = () => {
-  sessionStorage.setItem('debugSave', JSON.stringify(state))
-
-  location.replace('/')
-}
-
-window.addEventListener('load', () => {
-  if (sessionStorage.getItem('debugSave')) {
-    state = JSON.parse(sessionStorage.getItem('debugSave'))
-  }
-})
+createGlobals(editor)
