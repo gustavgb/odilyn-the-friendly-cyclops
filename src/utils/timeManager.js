@@ -18,7 +18,7 @@ class TimeManager {
     return this.deltaTime
   }
 
-  renderFPS (ctx, x, y) {
+  renderFPS (ctx, x, y, color = 'black') {
     if (this.deltaTime === 0) {
       return
     }
@@ -32,8 +32,8 @@ class TimeManager {
 
     ctx.textBaseline = 'top'
     ctx.textAlign = 'left'
-    ctx.font = '10px sans-serif'
-    ctx.fillStyle = 'black'
+    ctx.font = '15px sans-serif'
+    ctx.fillStyle = color
     ctx.fillText('FPS: ' + fpsAvg, x, y)
   }
 }
