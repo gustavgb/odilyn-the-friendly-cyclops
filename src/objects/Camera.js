@@ -9,11 +9,13 @@ class Camera {
   }
 
   getViewport (width, height) {
+    const zoom = this.zoom
+
     return {
-      x: -this.x - this.offsetX * width,
-      y: -this.y - this.offsetY * height,
-      w: width,
-      h: height
+      x: (-this.x - this.offsetX * width / zoom),
+      y: (-this.y - this.offsetY * height / zoom),
+      w: width / zoom,
+      h: height / zoom
     }
   }
 

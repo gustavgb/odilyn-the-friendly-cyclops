@@ -101,12 +101,17 @@ class Scene {
     const translate = this.camera.getTranslate(width, height)
     const scale = this.camera.getScale()
 
-    this.viewport = this.camera.getViewport(width, height)
+    const viewport = this.viewport = this.camera.getViewport(width, height)
 
     ctx.translate(translate.x, translate.y)
     ctx.scale(scale.x, scale.y)
 
     this.objects.forEach(obj => obj.shouldRender() && obj.render())
+
+    if (this.debugging) {
+      ctx.strokeStyle = '#ff0'
+      ctx.strokeRect(viewport.x, viewport.y, viewport.w, viewport.h)
+    }
 
     ctx.scale(1 / scale.x, 1 / scale.y)
     ctx.translate(-translate.x, -translate.y)
