@@ -15,6 +15,10 @@ class Platform extends WalkableObject {
   }
 
   render () {
+    if (!this.scene.debugging) {
+      return
+    }
+
     const ctx = this.scene.renderContext
 
     ctx.beginPath()

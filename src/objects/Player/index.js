@@ -32,10 +32,12 @@ class Player extends DynamicObject {
 
     const scale = this.scale = 0.2
 
-    this.x = x
-    this.y = y
     this.w = 190 * scale
     this.h = 243 * scale
+    this.feetPosition = {
+      x,
+      y
+    }
 
     this.eyesOffsetX = 20 * scale
     this.eyesOffsetY = 30 * scale
@@ -76,7 +78,7 @@ class Player extends DynamicObject {
       if (walking) {
         this.vX *= 0.98
       } else {
-        this.vX *= 0.9
+        this.vX *= 0.7
       }
 
       if (inputManager.isKeyDown('jump')) {

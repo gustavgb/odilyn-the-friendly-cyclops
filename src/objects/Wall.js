@@ -8,8 +8,8 @@ class Wall extends BlockingObject {
 
     const ctx = this.scene.renderContext
 
-    ctx.fillStyle = '#e50'
-    ctx.fillRect(this.x, this.y, this.w, this.h)
+    ctx.strokeStyle = '#e50'
+    ctx.strokeRect(this.x, this.y, this.w, this.h)
   }
 
   isBlocking (obj) {
