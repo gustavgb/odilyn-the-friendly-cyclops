@@ -1,13 +1,12 @@
 import Animation from 'components/Animation'
-import Renderer from 'base/Renderer'
 
-class Animator extends Renderer {
+class Animator {
   constructor (scheme) {
-    super()
     if (Animator.validateScheme(scheme)) {
       this.scheme = scheme
       this.currentAnimation = scheme.default
       this.lastAnimation = scheme.default
+      this.flipped = false
     }
   }
 

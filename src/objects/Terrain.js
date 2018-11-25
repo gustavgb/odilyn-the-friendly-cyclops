@@ -63,10 +63,15 @@ class Terrain extends WalkableObject {
     return null
   }
 
-  render (ctx) {
+  shouldRender () {
+    return true
+  }
+
+  render () {
     if (this.data.length <= 2) {
       return
     }
+    const ctx = this.scene.renderContext
 
     ctx.beginPath()
     ctx.moveTo(this.data[0], this.data[1])

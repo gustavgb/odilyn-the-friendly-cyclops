@@ -14,7 +14,9 @@ class Platform extends WalkableObject {
     return null
   }
 
-  render (ctx) {
+  render () {
+    const ctx = this.scene.renderContext
+
     ctx.beginPath()
     ctx.moveTo(this.x, this.y)
     ctx.lineTo(this.x + this.w, this.y)

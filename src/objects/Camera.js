@@ -8,6 +8,15 @@ class Camera {
     this.offsetY = 0.5
   }
 
+  getViewport (width, height) {
+    return {
+      x: -this.x - this.offsetX * width,
+      y: -this.y - this.offsetY * height,
+      w: width,
+      h: height
+    }
+  }
+
   getTranslate (width, height) {
     const zoom = this.zoom
 

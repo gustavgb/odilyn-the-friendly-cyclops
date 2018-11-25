@@ -18,8 +18,7 @@ class Game {
     this.bindedLoop = this.loop.bind(this)
 
     this.running = false
-
-    this.scene = new Scene()
+    this.scene = null
 
     this.createCanvas(root)
     this.resize()
@@ -43,9 +42,14 @@ class Game {
   }
 
   createCanvas (root) {
+    if (this.canvas) {
+      throw new Error('Game canvas already create, cannot create new.')
+    }
+
     document.body.style.backgroundColor = '#111'
 
     this.canvas = document.createElement('canvas')
+    this.renderContext = this.canvas.getContext('2d')
 
     if (!root) {
       root = document.body
@@ -83,6 +87,7 @@ class Game {
   setScene (scene) {
     if (scene instanceof Scene) {
       this.scene = scene
+      this.scene.renderContext = this.renderContext
       scene.camera.zoom = this.scale
     } else {
       throw new Error('Scene not valid.')
@@ -96,17 +101,21 @@ class Game {
 
     timeManager.update()
 
-    this.scene.update()
+    if (this.scene) {
+      this.scene.update()
+    }
 
     this.render()
   }
 
   render () {
-    const ctx = this.canvas.getContext('2d')
+    const ctx = this.renderContext
     ctx.fillStyle = '#f4f4d7'
     ctx.fillRect(0, 0, this.width, this.height)
 
-    this.scene.render(ctx, this.width, this.height)
+    if (this.scene) {
+      this.scene.render(this.width, this.height)
+    }
   }
 }
 

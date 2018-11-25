@@ -7,12 +7,27 @@ class Scene {
     this.walkable = []
     this.static = []
     this.dynamic = []
+    this.objects = objects.map(this.assignObjectScene.bind(this))
 
-    objects.forEach(obj => this.addObject(obj))
+    this.objects.forEach(obj => this.addObject(obj))
 
     this.camera = new Camera()
 
     this.follow = objects.filter(o => o.name === options.follow)[0] || null
+
+    this.renderContext = null
+
+    this.viewport = {
+      x: 0,
+      y: 0,
+      w: 1,
+      h: 1
+    }
+  }
+
+  assignObjectScene (obj) {
+    obj.scene = this
+    return obj
   }
 
   addObject (obj) {
@@ -63,16 +78,17 @@ class Scene {
     }
   }
 
-  render (ctx, width, height) {
+  render (width, height) {
+    const ctx = this.renderContext
     const translate = this.camera.getTranslate(width, height)
     const scale = this.camera.getScale()
+
+    this.viewport = this.camera.getViewport(width, height)
 
     ctx.translate(translate.x, translate.y)
     ctx.scale(scale.x, scale.y)
 
-    this.walkable.forEach(obj => obj.render(ctx))
-    this.static.forEach(obj => obj.render(ctx))
-    this.dynamic.forEach(obj => obj.render(ctx))
+    this.objects.forEach(obj => obj.shouldRender() && obj.render())
 
     ctx.scale(1 / scale.x, 1 / scale.y)
     ctx.translate(-translate.x, -translate.y)

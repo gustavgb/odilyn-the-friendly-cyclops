@@ -13,7 +13,7 @@ const terrain = new Terrain([
   800, 300
 ])
 
-const player = new Player(30, 450)
+const player = new Player(30, 400)
 player.name = 'Player'
 
 const platform = new Platform(300, 400, 100, 20)

@@ -12,7 +12,7 @@ class DynamicObject extends SceneObject {
   }
 
   update () {
-    if (this.type === 'dynamic' && !this.grounded) {
+    if (!this.grounded) {
       this.vY += 1000 * this.deltaTime
     } else if (this.grounded && this.vY !== 0) {
       this.vY = 0
@@ -23,10 +23,6 @@ class DynamicObject extends SceneObject {
   }
 
   get feetPosition () {
-    if (this.type !== 'dynamic') {
-      throw new Error('Feet position only available for dynamic scene objects.')
-    }
-
     return {
       x: this.x + this.w / 2,
       y: this.y + this.h
@@ -34,19 +30,11 @@ class DynamicObject extends SceneObject {
   }
 
   set feetPosition (position) {
-    if (this.type !== 'dynamic') {
-      throw new Error('Feet position only available for dynamic scene objects.')
-    }
-
     this.x = position.x - this.w / 2
     this.y = position.y - this.h
   }
 
   get deltaTime () {
-    if (this.type !== 'dynamic') {
-      throw new Error('Delta time only available for dynamic scene objects.')
-    }
-
     return timeManager.getDeltaTime()
   }
 }

@@ -99,7 +99,9 @@ class Player extends DynamicObject {
     super.update()
   }
 
-  render (ctx) {
+  render () {
+    const ctx = this.scene.renderContext
+
     let offsetX = this.x + this.w / 2 + this.eyesX - this.eyesWidth / 2
     const offsetY = this.y + this.h / 2 + this.eyesY - this.eyesHeight / 2
     let pupilsOffsetX = this.scale * 5
