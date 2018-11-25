@@ -68,7 +68,7 @@ class Terrain extends WalkableObject {
   }
 
   render () {
-    if (this.data.length <= 2) {
+    if (this.data.length <= 2 || !this.scene.debugging) {
       return
     }
     const ctx = this.scene.renderContext
@@ -80,7 +80,7 @@ class Terrain extends WalkableObject {
       ctx.lineTo(this.data[i], this.data[i + 1])
     }
 
-    ctx.strokeStyle = 'black'
+    ctx.strokeStyle = '#0f0'
     ctx.lineWidth = 3
     ctx.lineJoin = 'round'
     ctx.stroke()

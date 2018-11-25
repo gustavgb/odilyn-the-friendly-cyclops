@@ -16,10 +16,8 @@ class SceneObject {
   update () {}
 
   shouldRender () {
-    if (!this.render) {
+    if (!this.render || !this.scene) {
       return false
-    } else if (!this.scene) {
-      return true
     }
 
     const viewport = this.scene.viewport

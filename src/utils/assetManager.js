@@ -8,10 +8,16 @@ class Asset {
     this.image.onload = this.onLoad.bind(this)
 
     this.path = path
+
+    this.width = 0
+    this.height = 0
   }
 
   onLoad () {
     this.loaded = true
+
+    this.width = this.image.width
+    this.height = this.image.height
   }
 }
 

@@ -1,30 +1,25 @@
 import Player from 'objects/Player'
 import Terrain from 'objects/Terrain'
-import Platform from 'objects/Platform'
+import Image from 'objects/Image'
 import Scene from 'core/Scene'
+
+const background = new Image('bg', require('./home/bg.png'), -140, 30, 1.5, 'black')
 
 const terrain = new Terrain([
   0, 500,
-  500, 480,
-  450, 400,
-  600, 400,
-  550, 350,
-  400, 300,
-  800, 300
+  300, 500,
+  880, 490
 ])
 
 const player = new Player(30, 400)
 player.name = 'Player'
 
-const platform = new Platform(300, 400, 100, 20)
-
 window.player = player
 window.terrain = terrain
-window.platform = platform
 
 const scene = new Scene([
+  background,
   terrain,
-  platform,
   player
 ], {
   follow: 'Player'

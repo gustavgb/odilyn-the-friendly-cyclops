@@ -10,12 +10,8 @@ game.setScene(level1)
 
 game.start()
 
-const debug = window.debug = JSON.parse(sessionStorage.getItem('debug'))
-
 inputManager.addEvent('debug', () => {
-  if (debug) {
-    location.replace('/editor')
-  }
+  game.debugging = !game.debugging
 })
 
 window.game = game

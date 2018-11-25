@@ -15,14 +15,20 @@ class Scene {
 
     this.follow = objects.filter(o => o.name === options.follow)[0] || null
 
-    this.renderContext = null
-
     this.viewport = {
       x: 0,
       y: 0,
       w: 1,
       h: 1
     }
+  }
+
+  get debugging () {
+    return this.game.debugging
+  }
+
+  get renderContext () {
+    return this.game.renderContext
   }
 
   assignObjectScene (obj) {

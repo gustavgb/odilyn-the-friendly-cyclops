@@ -23,7 +23,7 @@ class Platform extends WalkableObject {
     ctx.lineTo(this.x + this.w * 0.8, this.y + this.h)
     ctx.lineTo(this.x + this.w * 0.2, this.y + this.h)
     ctx.lineTo(this.x, this.y)
-    ctx.strokeStyle = 'black'
+    ctx.strokeStyle = '#0f0'
     ctx.stroke()
   }
 }

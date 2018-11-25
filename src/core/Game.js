@@ -17,6 +17,8 @@ class Game {
     this.bindedResize = this.resize.bind(this)
     this.bindedLoop = this.loop.bind(this)
 
+    this.debugging = false
+
     this.running = false
     this.scene = null
 
@@ -87,7 +89,7 @@ class Game {
   setScene (scene) {
     if (scene instanceof Scene) {
       this.scene = scene
-      this.scene.renderContext = this.renderContext
+      this.scene.game = this
       scene.camera.zoom = this.scale
     } else {
       throw new Error('Scene not valid.')
