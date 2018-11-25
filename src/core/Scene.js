@@ -61,6 +61,7 @@ class Scene {
   update () {
     this.walkable.forEach(obj => obj.update())
     this.static.forEach(obj => obj.update())
+    this.blocking.forEach(obj => obj.update())
     this.dynamic.forEach(obj => obj.update())
 
     this.dynamic.forEach(obj => {
