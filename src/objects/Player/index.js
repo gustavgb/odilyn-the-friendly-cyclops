@@ -81,10 +81,10 @@ class Player extends DynamicObject {
         this.vX *= 0.7
       }
 
-      if (inputManager.isKeyDown('jump')) {
-        this.vY = -500
-        this.grounded = false
-      }
+      // if (inputManager.isKeyDown('jump')) {
+      //   this.vY = -500
+      //   this.grounded = false
+      // }
     } else {
       this.vX *= 0.98
     }

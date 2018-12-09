@@ -5,7 +5,7 @@ import Wall from 'objects/Wall'
 import Platform from 'objects/Platform'
 import Scene from 'core/Scene'
 
-const background = new Image('bg', require('./bg.png'), -140, 30, 1.5, 'black')
+const background = new Image('bg', require('./bg.png'), -140, 30, 'black')
 
 const terrain = new Terrain([
   0, 500,

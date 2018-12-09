@@ -1,5 +1,5 @@
 import Game from 'core/Game'
-import level1 from 'scenes/home'
+import level1 from 'scenes/house'
 import inputManager from 'utils/inputManager'
 
 const game = new Game({
@@ -12,6 +12,9 @@ game.start()
 
 inputManager.addEvent('debug', () => {
   game.debugging = !game.debugging
+  sessionStorage.setItem('debug', game.debugging)
 })
+
+game.debugging = sessionStorage.getItem('debug') === 'true' || false
 
 window.game = game
